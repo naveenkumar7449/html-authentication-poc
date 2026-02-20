@@ -12,7 +12,6 @@ This project contains 5 HTML pages demonstrating a simple authentication flow us
 
 ## Description
 
-All pages are connected using anchor tags.
 No CSS or JavaScript is used.
 This project focuses only on HTML structure.
 
