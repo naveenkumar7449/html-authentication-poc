@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-page">
+    <div class="card">
+        <h1>Register</h1>
+        <form action="login.html">
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <div class="input-group">
+                    <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email ID</label>
+                <div class="input-group">
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone No</label>
+                <div class="input-group">
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="reg-password" class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" id="reg-password" class="form-control" placeholder="Create a password" oninput="checkStrength(this.value)" required>
+                    <span class="input-group-text" onclick="togglePassword('reg-password', this)">
+                        <i class="bi bi-eye"></i>
+                    </span>
+                </div>
+                <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+                <div class="strength-text" id="strength-text"></div>
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <div class="input-group">
+                    <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password" required>
+                    <span class="input-group-text" onclick="togglePassword('confirm-password', this)">
+                        <i class="bi bi-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-2">
+                <i class="bi bi-person-check me-2"></i>Register
+            </button>
+        </form>
+        <div class="footer-link">
+            Already have an account? <a href="login.html">Login</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword(id, btn) {
+            const input = document.getElementById(id);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'bi bi-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'bi bi-eye';
+            }
+        }
+        function checkStrength(val) {
+            const fill = document.getElementById('strength-fill');
+            const text = document.getElementById('strength-text');
+            let score = 0;
+            if (val.length >= 8) score++;
+            if (/[A-Z]/.test(val)) score++;
+            if (/[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+            const levels = [
+                { w: '0%',   color: '',        label: '' },
+                { w: '25%',  color: '#e74c3c', label: 'Weak' },
+                { w: '50%',  color: '#f39c12', label: 'Fair' },
+                { w: '75%',  color: '#3498db', label: 'Good' },
+                { w: '100%', color: '#2ecc71', label: 'Strong' },
+            ];
+            const l = val.length === 0 ? levels[0] : levels[score] || levels[1];
+            fill.style.width = l.w;
+            fill.style.background = l.color;
+            text.textContent = l.label;
+            text.style.color = l.color;
+        }
+    </script>
+</body>
+</html>
